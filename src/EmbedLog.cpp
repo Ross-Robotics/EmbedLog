@@ -186,7 +186,6 @@ namespace EmbedLog
                 result << format[i]; // Normal character
             }
         }
-        result << "\n";
 
         printFunc(result.str());
     }
