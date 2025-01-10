@@ -145,6 +145,7 @@ namespace EmbedLog
         uint64_t seconds = totalSeconds % 60;
 
         std::stringstream result;
+        result << "\u001b[1m";
         for (size_t i = 0; i < format.size(); ++i)
         {
             if (format[i] == '%')
@@ -157,9 +158,6 @@ namespace EmbedLog
                     break;
                 case 'L':
                     result << getLogLevelString(level); // Level
-                    break;
-                case 'T':
-                    result << message; // Text
                     break;
                 case 'D':
                     result << std::setfill('0') << std::setw(2) << (hours / 24); // Days
@@ -187,6 +185,7 @@ namespace EmbedLog
             }
         }
 
+        result << " " << "\033[0m" << message << "\n";
         printFunc(result.str());
     }
 
@@ -200,13 +199,13 @@ namespace EmbedLog
         switch (level)
         {
         case INFO:
-            return "INFO";
+            return "\e[1;92mINFO\u001b[0m\u001b[1m";
         case WARNING:
-            return "WARNING";
+            return "\e[1;93mWARNING\u001b[0m\u001b[1m";
         case ERROR:
-            return "ERROR";
+            return "\e[1;91mERROR\u001b[0m\u001b[1m";
         case DEBUG:
-            return "DEBUG";
+            return "\e[1;94mDEBUG\u001b[0m\u001b[1m";
         case NONE:
             return "NONE";
         default:
