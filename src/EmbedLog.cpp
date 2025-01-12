@@ -185,7 +185,7 @@ namespace EmbedLog
             }
         }
 
-        result << " " << "\033[0m" << message << "\n";
+        result << " " << "\033[0m" << message << "\r\n";
         printFunc(result.str());
     }
 
