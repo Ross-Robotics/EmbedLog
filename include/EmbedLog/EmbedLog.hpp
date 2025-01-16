@@ -76,10 +76,10 @@ namespace EmbedLog
          * @note It is important to provide valid open, close, and print functions 
          * to enable proper operation of the log system.
          */
-        EmbedLog(OpenFunction openFunc, 
-                 CloseFunction closeFunc, 
-                 PrintFunction printFunc, 
-                 MicrosecondFunction microsecondFunc, 
+        EmbedLog(OpenFunction open_func, 
+                 CloseFunction close_func, 
+                 PrintFunction print_func, 
+                 MicrosecondFunction microsecond_func, 
                  std::string name, 
                  std::string format = "[%D:%H:%M:%S.%U %N %L] %T");
 
@@ -134,16 +134,17 @@ namespace EmbedLog
         void log_throttled(size_t throttle_id, uint32_t throttle_ms, LogLevel level,  const std::string& format, ...);
 
     private:
-        OpenFunction openFunc;                // Function for opening the log.
-        CloseFunction closeFunc;              // Function for closing the log.
-        PrintFunction printFunc;              // Function for printing log messages.
-        MicrosecondFunction microsecondFunc;  // Function for getting microsecond timestamps.
+        OpenFunction m_open_func;                // Function for opening the log.
+        CloseFunction m_close_func;              // Function for closing the log.
+        PrintFunction m_print_func;              // Function for printing log messages.
+        MicrosecondFunction m_microsecond_func;  // Function for getting microsecond timestamps.
 
-        ThrottleMap throttleMap;              // Map of throttle IDs to last message times.
-        LogLevel logLevel = INFO;             // Current log level.
-        bool isOpen = false;                  // Tracks whether the log is currently open.
-        std::string format;                   // Format for the timestamp.
-        std::string name;                     // Log name.
+        ThrottleMap m_throttle_map;              // Map of throttle IDs to last message times.
+        LogLevel m_log_level = INFO;             // Current log level.
+        bool m_is_open = false;                  // Tracks whether the log is currently open.
+        std::string m_name;                     // Log name.
+        std::string m_format;                   // Format for the timestamp.
+
 
         /**
          * @brief Prints a message at a specified log level.
