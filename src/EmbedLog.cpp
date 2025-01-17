@@ -191,7 +191,7 @@ void EmbedLog::print(LogLevel level, const std::string &message)
         }
     }
 
-    result << " " << "\033[0m" << message << "\n";
+    result << " " << "\033[0m" << message << "\r\n";
     m_print_func(result.str());
 }
 
