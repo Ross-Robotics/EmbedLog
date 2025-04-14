@@ -51,7 +51,7 @@ enum class LogLevel : uint8_t
  * @param level The LogLevel to be converted.
  * @return A string representing the log level, with ANSI color codes for formatting.
  */
-std::string logLevelToString(LogLevel level)
+static std::string logLevelToString(LogLevel level)
 {
     switch (level)
     {
@@ -101,7 +101,7 @@ struct TimeStamp
     uint8_t  hours;
     uint8_t  day;
     uint8_t  month;
-    uint8_t  year;
+    uint16_t year;
 };
 
 /**
